@@ -1,18 +1,22 @@
 #pragma once
 
-#include <utility>
-#include <bitset>
 #include "esphome.h"
+#include "esphome/core/component.h"
+#include "esphome/components/uart/uart_device.h"
+#include "esphome/components/sensor/sensor.h"
 
 namespace esphome
 {
     namespace desk_height_sensor
     {
 
-        class DeskHeightSensor : public Component, public uart::UARTDevice, public sensor::Sensor
+        using namespace esphome::uart;   // Add this line
+        using namespace esphome::sensor; // Add this line
+
+        class DeskHeightSensor : public Component, public UARTDevice, public Sensor
         {
         public:
-            DeskHeightSensor(uart::UARTComponent *parent) : UARTDevice(parent) {}
+            DeskHeightSensor(UARTComponent *parent) : UARTDevice(parent) {}
 
             void setup() override;
             void loop() override;
