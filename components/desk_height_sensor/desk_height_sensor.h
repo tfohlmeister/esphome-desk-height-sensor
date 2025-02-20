@@ -1,9 +1,6 @@
 #pragma once
 
 #include "esphome.h"
-#include "esphome/core/component.h"
-#include "esphome/components/uart/uart_device.h"
-#include "esphome/components/sensor/sensor.h"
 
 namespace esphome
 {
