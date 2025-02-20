@@ -1,13 +1,16 @@
 #pragma once
 
 #include "esphome.h"
+#include "esphome/core/component.h"
+#include "esphome/components/sensor/sensor.h"
+#include "esphome/components/uart/uart.h"
 
 namespace esphome
 {
     namespace desk_height_sensor
     {
 
-        class DeskHeightSensor : public Component, public UARTDevice, public Sensor
+        class DeskHeightSensor : public Component, public uart::UARTDevice, public sensor::Sensor
         {
         public:
             DeskHeightSensor(UARTComponent *parent) : UARTDevice(parent) {}
