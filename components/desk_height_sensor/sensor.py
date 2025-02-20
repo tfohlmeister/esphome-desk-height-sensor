@@ -3,6 +3,7 @@ import esphome.config_validation as cv
 from esphome.components import sensor, uart
 from esphome.const import (
     CONF_ID,
+    CONF_UART_ID,
     UNIT_CENTIMETER,
     ICON_RULER,
     STATE_CLASS_MEASUREMENT,
@@ -22,9 +23,13 @@ CONFIG_SCHEMA = sensor.sensor_schema(
     icon=ICON_RULER,
     accuracy_decimals=1,
     state_class=STATE_CLASS_MEASUREMENT,
-).extend(uart.UART_DEVICE_SCHEMA)
+).extend({
+    cv.Required(CONF_UART_ID): cv.use_id(uart.UARTComponent),
+}).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
     var = await sensor.new_sensor(config)
     await cg.register_component(var, config)
-    await uart.register_uart_device(var, config)
+    
+    parent = await cg.get_variable(config[CONF_UART_ID])
+    cg.add(var.set_parent(parent))
