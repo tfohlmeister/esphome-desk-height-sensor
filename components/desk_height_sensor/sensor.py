@@ -28,6 +28,6 @@ CONFIG_SCHEMA = sensor.sensor_schema(
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
-    var = await cg.new_Pvariable(config[CONF_ID], await cg.get_variable(config[CONF_UART_ID]))
+    var = cg.new_Pvariable(config[CONF_ID]), cg.get_variable(config[CONF_UART_ID])
     await cg.register_component(var, config)
     await sensor.register_sensor(var, config)
