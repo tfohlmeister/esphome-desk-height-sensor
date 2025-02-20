@@ -13,7 +13,13 @@ namespace esphome
         class DeskHeightSensor : public Component, public uart::UARTDevice, public sensor::Sensor
         {
         public:
-            void set_uart_parent(uart::UARTComponent *parent) { this->set_uart_parent_(parent); }
+            DeskHeightSensor() : uart::UARTDevice() {}
+
+            void set_uart_parent(uart::UARTComponent *parent)
+            {
+                this->uart_parent_ = parent;
+            }
+
             void setup() override;
             void loop() override;
             float get_setup_priority() const override;
