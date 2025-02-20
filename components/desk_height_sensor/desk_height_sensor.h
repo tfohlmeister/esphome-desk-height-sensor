@@ -1,9 +1,6 @@
 #pragma once
 
 #include "esphome.h"
-#include "esphome/core/component.h"
-#include "esphome/components/sensor/sensor.h"
-#include "esphome/components/uart/uart.h"
 
 namespace esphome
 {
@@ -13,7 +10,12 @@ namespace esphome
         class DeskHeightSensor : public Component, public uart::UARTDevice, public sensor::Sensor
         {
         public:
-            DeskHeightSensor(uart::UARTComponent *parent) : UARTDevice(parent) {}
+            DeskHeightSensor() = default;
+
+            void set_uart_parent(uart::UARTComponent *parent)
+            {
+                this->set_uart_device(parent);
+            }
 
             void setup() override;
             void loop() override;
