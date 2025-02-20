@@ -27,7 +27,9 @@ CONFIG_SCHEMA = sensor.sensor_schema(
     cv.Required(CONF_UART_ID): cv.use_id(uart.UARTComponent),
 }).extend(cv.COMPONENT_SCHEMA)
 
-async def to_code(config):
-    var = await cg.new_Pvariable(config[CONF_ID], await cg.get_variable(config[CONF_UART_ID]))
-    await cg.register_component(var, config)
-    await sensor.register_sensor(var, config)
+def to_code(config):
+    var = cg.new_Pvariable(config[CONF_ID])
+    uart_component = yield cg.get_variable(config[CONF_UART_ID])
+    cg.add(var.set_uart_parent(uart_component))
+    yield cg.register_component(var, config)
+    yield sensor.register_sensor(var, config)
