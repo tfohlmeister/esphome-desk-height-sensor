@@ -17,7 +17,7 @@ namespace esphome
 
             void set_uart_parent(uart::UARTComponent *parent)
             {
-                this->set_uart_device(parent);
+                this->set_uart(parent);
             }
 
             void setup() override;
