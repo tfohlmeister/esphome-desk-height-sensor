@@ -1,3 +1,4 @@
+#include "esphome.h"
 #include "desk_height_sensor.h"
 #include <bitset>
 
