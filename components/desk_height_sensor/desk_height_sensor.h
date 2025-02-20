@@ -7,9 +7,6 @@ namespace esphome
     namespace desk_height_sensor
     {
 
-        using namespace esphome::uart;   // Add this line
-        using namespace esphome::sensor; // Add this line
-
         class DeskHeightSensor : public Component, public UARTDevice, public Sensor
         {
         public:
